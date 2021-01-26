@@ -23,9 +23,8 @@ use Illuminate\Support\Str;
 use Maatwebsite\Excel\Concerns\ToCollection;
 use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
-use Maatwebsite\Excel\Concerns\WithBatchInserts;
 
-class HasilPemeriksaanAkhirImport implements ToCollection, WithHeadingRow, WithChunkReading, WithBatchInserts
+class HasilPemeriksaanAkhirImport implements ToCollection, WithHeadingRow, WithChunkReading
 {
     use RegisterTrait;
 
@@ -38,7 +37,6 @@ class HasilPemeriksaanAkhirImport implements ToCollection, WithHeadingRow, WithC
                 if (!$row->get('no')) {
                     continue;
                 }
-
                 $validator = Validator::make($row->toArray(), [
                     'tgl_masuk_sampel' => 'required|date|date_format:Y-m-d',
                     'kode_sampel' => 'required',
@@ -53,27 +51,6 @@ class HasilPemeriksaanAkhirImport implements ToCollection, WithHeadingRow, WithC
                     'tanggal_swab' => 'nullable|date|date_format:Y-m-d',
                     'interpretasi' => 'required|in:Positif,Negatif,Inkonklusif',
                     'tanggal_pemeriksaan' => 'required|date|date_format:Y-m-d',
-                ], [
-                    'tgl_masuk_sampel.required' => 'Tanggal masuk sampel tidak boleh kosong',
-                    'tgl_masuk_sampel.date' => 'Tanggal Masuk Sampel tidak valid',
-                    'tgl_masuk_sampel.date_format' => 'Format Tanggal Masuk Sampel harus yyyy-mm-dd',
-                    'kode_sampel.required' => 'Nomor Sampel tidak boleh kosong',
-                    'kategori.required' => 'Kategori tidak boleh kosong',
-                    'nama.required' => 'Nama Pasien Tidak Boleh Kosong',
-                    'nik.digits' => 'NIK terdiri dari 16 karakter',
-                    'tgl_lahir.date' => 'Tanggal Lahir tidak valid',
-                    'tgl_lahir.date_format' => 'Format Tanggal Lahir harus yyyy-mm-dd',
-                    'kriteria.in' => 'kriteria harus berisi Kontak Erat, Suspek, Probable, Konfirmasi atau Tanpa Kriteria',
-                    'jenis_sampel.required' => 'Jenis Sampel tidak boleh kosong',
-                    'kode_instansi.required' => 'Kode Instansi tidak boleh kosong',
-                    'kode_instansi.numeric' => 'Kode Instansi harus berupa angka',
-                    'swab_ke.numeric' => 'Swab ke harus berupa angka',
-                    'tanggal_swab.date' => 'Tanggal Swab tidak valid',
-                    'tanggal_swab.date_format' => 'Format Tanggal Swab harus yyyy-mm-dd',
-                    'interpretasi.required' => 'Interpretasi tidak boleh kosong',
-                    'interpretasi.in' => 'Interpretasi tidak valid harus Positif,Negatif,Inkonklusif',
-                    'tanggal_pemeriksaan.date' => 'Tanggal Pemeriksaan tidak valid',
-                    'tanggal_pemeriksaan.date_format' => 'Format Tanggal Pemeriksaan harus yyyy-mm-dd',
                 ]);
 
                 $validator->after(function ($validator) use ($row) {
@@ -247,11 +224,6 @@ class HasilPemeriksaanAkhirImport implements ToCollection, WithHeadingRow, WithC
     }
 
     public function chunkSize(): int
-    {
-        return 1000;
-    }
-
-    public function batchSize(): int
     {
         return 1000;
     }
