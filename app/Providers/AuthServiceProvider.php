@@ -12,7 +12,7 @@ class AuthServiceProvider extends ServiceProvider
      *
      * @var array
      */
-    protected $_policies = [
+    protected $policies = [
         // 'App\Model' => 'App\Policies\ModelPolicy',
     ];
 
@@ -24,9 +24,5 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        Gate::define('integrasi-kemenkes', function ($user) {
-            return $user->role_id == ROLE_KEMENKES;
-        });
     }
 }
