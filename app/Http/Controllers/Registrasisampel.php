@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\RegisMandiriExport;
 use App\Http\Resources\RegisterSampelResource;
 use App\Models\Register;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class Registrasisampel extends Controller
 {
