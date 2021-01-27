@@ -94,7 +94,7 @@ class Registrasisampel extends Controller
                     break;
                 case "nomor_sampel":
                     $models->whereHas('sampel', function($query) use ($val) {
-                        $query->whereDate('nomor_sampel', 'ilike', '%' . $val . '%');
+                        $query->where('nomor_sampel', 'ilike', '%' . $val . '%');
                     });
                     break;
             }
@@ -118,7 +118,7 @@ class Registrasisampel extends Controller
                 break;
             case 'nama_kota':
                 $models->whereHas('pasienRegister.pasien', function ($query) use ($order_direction) {
-                    $query->orderBy('nama', $order_direction);
+                    $query->orderBy('kota_id', $order_direction);
                 });
                 break;
             case 'no_sampel':
