@@ -101,8 +101,6 @@ class Registrasisampel extends Controller
                         $query->whereDate('nomor_sampel', 'ilike', '%' . $val . '%');
                     });
                     break;
-                default:
-                    break;
             }
         }
 
@@ -140,8 +138,6 @@ class Registrasisampel extends Controller
                 break;
             case 'status':
                 $models->orderBy('status', $order_direction);
-                break;
-            default:
                 break;
         }
         return $models;
