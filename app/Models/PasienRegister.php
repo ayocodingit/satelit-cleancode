@@ -14,4 +14,14 @@ class PasienRegister extends Pivot
     ];
 
     public $timestamps = false;
+
+    public function register()
+    {
+        return $this->belongsTo(Register::class);
+    }
+
+    public function pasien()
+    {
+        return $this->hasOne(Pasien::class, 'id', 'pasien_id');
+    }
 }
