@@ -88,13 +88,9 @@ class Registrasisampel extends Controller
                     });
                     break;
                 case "fasyankes_id":
-                    $models->where('fasyankes_id', $val);
-                    break;
                 case "sumber_pasien":
-                    $models->where('sumber_pasien', 'ilike', '%' . $val . '%');
-                    break;
                 case "status":
-                    $models->where('status', 'ilike', '%' . $val . '%');
+                    $models->where($key, 'ilike', '%' . $val . '%');
                     break;
                 case "nomor_sampel":
                     $models->whereHas('sampel', function($query) use ($val) {
@@ -134,10 +130,8 @@ class Registrasisampel extends Controller
                 $models->orderBy('nama_rs', $order_direction);
                 break;
             case 'sumber_pasien':
-                $models->orderBy('sumber_pasien', $order_direction);
-                break;
             case 'status':
-                $models->orderBy('status', $order_direction);
+                $models->orderBy($order, $order_direction);
                 break;
         }
         return $models;
