@@ -146,5 +146,4 @@ class Registrasisampel extends Controller
         }
         return $models;
     }
-
 }
